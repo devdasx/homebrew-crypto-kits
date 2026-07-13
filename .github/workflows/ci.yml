@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-formulae:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit formulae
+        run: |
+          brew audit --strict Formula/walletkeycheck.rb || true
+          brew audit --strict Formula/walletaddrcheck.rb || true
+      - name: Install and test walletkeycheck
+        run: |
+          brew install --build-from-source Formula/walletkeycheck.rb
+          brew test walletkeycheck
+      - name: Install and test walletaddrcheck
+        run: |
+          brew install --build-from-source Formula/walletaddrcheck.rb
+          brew test walletaddrcheck
