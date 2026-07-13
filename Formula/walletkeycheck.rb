@@ -8,7 +8,8 @@ class Walletkeycheck < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", "-g", "--prefix", libexec, buildpath
+    system "npm", "pack"
+    system "npm", "install", "-g", "--prefix", libexec, Dir["wallet-key-validator-kit-*.tgz"].first
     bin.install_symlink libexec/"bin/walletkeycheck" => "walletkeycheck"
   end
 
