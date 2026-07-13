@@ -13,8 +13,13 @@ jobs:
         run: brew tap devdasx/crypto-kits "$GITHUB_WORKSPACE"
       - name: Audit formulae
         run: |
+          brew audit --strict devdasx/crypto-kits/bip39kit || true
           brew audit --strict devdasx/crypto-kits/walletkeycheck || true
           brew audit --strict devdasx/crypto-kits/walletaddrcheck || true
+      - name: Install and test bip39kit
+        run: |
+          brew install --build-from-source devdasx/crypto-kits/bip39kit
+          brew test devdasx/crypto-kits/bip39kit
       - name: Install and test walletkeycheck
         run: |
           brew install --build-from-source devdasx/crypto-kits/walletkeycheck
