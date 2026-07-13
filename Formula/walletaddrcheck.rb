@@ -9,7 +9,7 @@ class Walletaddrcheck < Formula
 
   def install
     system "npm", "install", "-g", "--prefix", libexec, buildpath
-    bin.install_symlink libexec/"bin/walletaddrcheck"
+    bin.install_symlink libexec/"bin/walletaddrcheck" => "walletaddrcheck"
   end
 
   test do
