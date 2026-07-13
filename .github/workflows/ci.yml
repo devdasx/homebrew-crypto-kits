@@ -9,15 +9,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Tap checkout
+        run: brew tap devdasx/crypto-kits "$GITHUB_WORKSPACE"
       - name: Audit formulae
         run: |
-          brew audit --strict Formula/walletkeycheck.rb || true
-          brew audit --strict Formula/walletaddrcheck.rb || true
+          brew audit --strict devdasx/crypto-kits/walletkeycheck || true
+          brew audit --strict devdasx/crypto-kits/walletaddrcheck || true
       - name: Install and test walletkeycheck
         run: |
-          brew install --build-from-source Formula/walletkeycheck.rb
-          brew test walletkeycheck
+          brew install --build-from-source devdasx/crypto-kits/walletkeycheck
+          brew test devdasx/crypto-kits/walletkeycheck
       - name: Install and test walletaddrcheck
         run: |
-          brew install --build-from-source Formula/walletaddrcheck.rb
-          brew test walletaddrcheck
+          brew install --build-from-source devdasx/crypto-kits/walletaddrcheck
+          brew test devdasx/crypto-kits/walletaddrcheck
